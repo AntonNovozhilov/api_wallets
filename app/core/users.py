@@ -1,7 +1,5 @@
 from typing import AsyncGenerator, Union
 
-from core.config import settings
-from core.db import get_async_session
 from fastapi import Depends
 from fastapi_users import (BaseUserManager, FastAPIUsers, IntegerIDMixin,
                            InvalidPasswordException)
@@ -11,6 +9,9 @@ from fastapi_users.db import SQLAlchemyUserDatabase
 from models import User
 from schemas import UserCreate
 from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.core.config import settings
+from app.core.db import get_async_session
 
 
 async def get_user_db(

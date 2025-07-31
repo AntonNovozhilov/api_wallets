@@ -1,5 +1,6 @@
-from core.config import settings
 from pydantic import BaseModel, Field, PositiveInt, field_validator
+
+from app.core.config import settings
 
 
 class WalletBase(BaseModel):

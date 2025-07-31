@@ -1,9 +1,10 @@
 from typing import AsyncGenerator
 
-from core.config import settings
 from sqlalchemy import Column, Integer
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
+
+from app.core.config import settings
 
 
 class PreBase:
