@@ -34,11 +34,15 @@ auth_backend = AuthenticationBackend(
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
-    async def validation(self, password: str, user: Union[UserCreate, User]) -> None:
+    async def validation(
+        self, password: str, user: Union[UserCreate, User]
+    ) -> None:
         if len(password) < 3:
             raise InvalidPasswordException("Пароль слишком короткий")
         if user.email in password:
-            raise InvalidPasswordException("Пароль не должен состоять из почты.")
+            raise InvalidPasswordException(
+                "Пароль не должен состоять из почты."
+            )
 
 
 async def get_usermanager(user_db=Depends(get_user_db)) -> AsyncGenerator:

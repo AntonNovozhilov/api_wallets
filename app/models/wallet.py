@@ -1,8 +1,6 @@
-from sqlalchemy import CheckConstraint, Column, Enum, Integer, ForeignKey
-from sqlalchemy.orm import relationship
 from core.db import Base
-
-
+from sqlalchemy import CheckConstraint, Column, ForeignKey, Integer
+from sqlalchemy.orm import relationship
 
 
 class Wallet(Base):
@@ -13,4 +11,4 @@ class Wallet(Base):
 
     user = relationship("User", back_populates="wallets")
 
-    __table_args__ = (CheckConstraint('balance >= 0'))
+    __table_args__ = CheckConstraint("balance >= 0")

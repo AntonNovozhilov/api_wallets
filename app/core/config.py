@@ -6,6 +6,9 @@ class Settings(BaseSettings):
     TITLE: str = "Название проекта"
     DATABASE_URL: str
 
+    DEPOSIT: str = "DEPOSIT"
+    WITHDRAW: str = "WITHDRAW"
+
     class Config:
         env_file = ".env"
 
