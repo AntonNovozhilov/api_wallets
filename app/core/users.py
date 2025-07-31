@@ -6,8 +6,8 @@ from fastapi_users import (BaseUserManager, FastAPIUsers, IntegerIDMixin,
 from fastapi_users.authentication import (AuthenticationBackend,
                                           BearerTransport, JWTStrategy)
 from fastapi_users.db import SQLAlchemyUserDatabase
-from models import User
-from schemas import UserCreate
+from app.models import User
+from app.schemas import UserCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.config import settings

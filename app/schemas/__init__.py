@@ -1,3 +1,3 @@
-from schemas import UserCreate, UserRead, UserUpdate
+from app.schemas.users import UserCreate, UserRead, UserUpdate
 
 __all__ = ["UserCreate", "UserRead", "UserUpdate"]

@@ -1,7 +1,8 @@
-from models import Wallet
+from typing import Optional
+from app.models import Wallet, User
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from storage import Repositories
+from app.repositories.storage import Repositories
 
 
 class WalletRepositories(Repositories):
@@ -21,14 +22,14 @@ class WalletRepositories(Repositories):
         objects = await session.execute(select(self.model))
         return objects.scalars().all()
 
-    async def update_object(self, obj, data: dict, session: AsyncSession):
-        """Обновление объекта."""
-        up_data = data.dict(exclude_unset=True)
-        for filed, value in up_data.items():
-            setattr(obj, filed, value)
-        await session.commit()
-        await session.refresh(obj)
-        return obj
+    # async def update_object(self, obj, data: dict, session: AsyncSession, user: Optional[User]=None):
+    #     """Обновление объекта."""
+    #     up_data = data.dict(exclude_unset=True)
+    #     for filed, value in up_data.items():
+    #         setattr(obj, filed, value)
+    #     await session.commit()
+    #     await session.refresh(obj)
+    #     return obj
 
 
 wallet_repositories = WalletRepositories()

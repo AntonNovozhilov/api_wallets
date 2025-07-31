@@ -1,4 +1,4 @@
-from core.db import Base
-from models import User, Wallet
+from app.core.db import Base
+from app.models import User, Wallet
 
 __all__ = ["Base", "User", "Wallet"]
