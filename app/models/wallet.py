@@ -1,12 +1,13 @@
-from app.core.db import Base
-from sqlalchemy import CheckConstraint, Column, ForeignKey, Integer
+from sqlalchemy import CheckConstraint, Column, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
+
+from app.core.db import Base
 
 
 class Wallet(Base):
     """Кошелек."""
 
-    balance = Column(Integer, nullable=False, default=0)
+    balance = Column(Float, nullable=False, default=0)
     owner = Column(ForeignKey("user.id"))
 
     user = relationship("User", back_populates="wallets")

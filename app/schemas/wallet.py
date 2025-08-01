@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, PositiveInt, field_validator
+from pydantic import BaseModel, Field, field_validator
 
 from app.core.config import settings
 
@@ -6,7 +6,7 @@ from app.core.config import settings
 class WalletBase(BaseModel):
     """Кошелек."""
 
-    balance: PositiveInt = Field(..., description="Баланс")
+    balance: float = Field(..., description="Баланс", ge=0)
     owner: int = Field(..., description="Владелец кошелька")
 
 
@@ -17,8 +17,12 @@ class WalletRead(WalletBase):
 class WalletUpdate(BaseModel):
     """Обновление кошелька."""
 
-    operation_type: str = Field(..., description="Действие")
-    amount: PositiveInt = Field(..., description="Сумма")
+    operation_type: str = Field(
+        ...,
+        examples=[settings.DEPOSIT, settings.WITHDRAW],
+        description="Действие",
+    )
+    amount: float = Field(..., description="Сумма", gt=0)
 
     @field_validator("operation_type")
     @classmethod

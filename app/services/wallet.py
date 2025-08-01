@@ -1,25 +1,32 @@
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.api.validators import validate
 from app.core.config import settings
-from app.repositories.wallet import WalletRepositories
 
-class WalletOperation(WalletRepositories):
 
-        async def _operations(self, obj, method: str, ammount: int):
-            if method == settings.DEPOSIT:
-                obj.balance += ammount
-                return obj.balance
-            if method == settings.WITHDRAW:
-                obj.balance -= ammount
-                return obj.balance
-            
-wallet_operation = WalletOperation()
+class WalletOperation:
 
-    # async def _deposit(self, method, ammount: int):
-    #     if method == settings.DEPOSIT:
-    #         self.obj.balance += ammount
-    #         return self.obj.balance
-        
-    # async def _withdraw(self, method, ammount: int):
-    #     if method == settings.WITHDRAW:
-    #         self.obj.balance -= ammount
-    #         return self.obj.balance
+    def __init__(self, valida):
+        self.validate = valida
 
+    async def deposit(
+        self, obj, method: str, ammount: int, session: AsyncSession
+    ):
+        if method == settings.DEPOSIT:
+            obj.balance += ammount
+        await session.commit()
+        await session.refresh(obj)
+        return obj
+
+    async def withdraw(
+        self, obj, method: str, ammount: int, session: AsyncSession
+    ):
+        if method == settings.WITHDRAW:
+            obj.balance -= ammount
+        await self.validate.positive_balance(obj.balance)
+        await session.commit()
+        await session.refresh(obj)
+        return obj
+
+
+wallet_operation = WalletOperation(validate)
