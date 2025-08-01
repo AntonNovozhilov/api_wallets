@@ -5,6 +5,7 @@ from app.core.config import settings
 
 
 class WalletOperation:
+    """Операции с кошельком."""
 
     def __init__(self, valida):
         self.validate = valida
@@ -12,6 +13,7 @@ class WalletOperation:
     async def deposit(
         self, obj, method: str, ammount: int, session: AsyncSession
     ):
+        """Пополнение."""
         if method == settings.DEPOSIT:
             obj.balance += ammount
         await session.commit()
@@ -21,6 +23,7 @@ class WalletOperation:
     async def withdraw(
         self, obj, method: str, ammount: int, session: AsyncSession
     ):
+        """Списание."""
         if method == settings.WITHDRAW:
             obj.balance -= ammount
         await self.validate.positive_balance(obj.balance)

@@ -6,6 +6,7 @@ from app.repositories.storage import Repositories
 
 
 class WalletRepositories(Repositories):
+    """Операции с моделью Wallet."""
 
     def __init__(self, model):
         self.model = model

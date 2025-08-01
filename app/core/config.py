@@ -5,6 +5,7 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
+    """Настройки приложения."""
 
     TITLE: str
     SECRET: str
@@ -20,6 +21,7 @@ class Settings(BaseSettings):
 
     @property
     def date_base(self):
+        """Путь к базе данных."""
         return (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
