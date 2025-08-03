@@ -13,18 +13,18 @@ class Settings(BaseSettings):
     DEPOSIT: str = "DEPOSIT"
     WITHDRAW: str = "WITHDRAW"
 
-    DB_PORT: int
-    DB_HOST: str
-    DB_NAME: str
-    DB_USER: str
-    DB_PASSWORD: str
+    POSTGRES_PORT: int
+    POSTGRES_SERVER: str
+    POSTGRES_DB: str
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
 
     @property
     def date_base(self):
         """Путь к базе данных."""
         return (
-            f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}"
-            f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+            f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+            f"@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
         )
 
     class Config:
