@@ -29,6 +29,7 @@ cd api_wallets
 Создайте файл .env в корне проекта:
 
 ```
+cd app
 touch .env
 ```
 
