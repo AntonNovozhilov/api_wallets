@@ -11,14 +11,14 @@ class WalletRepositories(Repositories):
     def __init__(self, model):
         self.model = model
 
-    async def get_by_id(self, pk: int, session: AsyncSession):
+    async def get_by_id(self, pk: int, session: AsyncSession) -> Wallet:
         """Получаем объект по pk."""
         obj = await session.execute(
             select(self.model).where(self.model.id == pk)
         )
         return obj.scalar()
 
-    async def get_multy(self, session: AsyncSession) -> list:
+    async def get_multy(self, session: AsyncSession) -> list[Wallet]:
         """Получаем несколько объектов."""
         objects = await session.execute(select(self.model))
         return objects.scalars().all()

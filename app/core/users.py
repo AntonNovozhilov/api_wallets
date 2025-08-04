@@ -35,7 +35,7 @@ auth_backend = AuthenticationBackend(
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
-    async def validation(
+    async def validate_password(
         self, password: str, user: Union[UserCreate, User]
     ) -> None:
         if len(password) < 3:
@@ -46,7 +46,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
             )
 
 
-async def get_usermanager(user_db=Depends(get_user_db)) -> AsyncGenerator:
+async def get_usermanager(
+    user_db=Depends(get_user_db),
+) -> AsyncGenerator:
     yield UserManager(user_db)
 
 

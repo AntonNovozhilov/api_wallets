@@ -2,6 +2,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.validators import validate
 from app.core.config import settings
+from app.models.wallet import Wallet
 
 
 class WalletOperation:
@@ -12,7 +13,7 @@ class WalletOperation:
 
     async def deposit(
         self, obj, method: str, ammount: int, session: AsyncSession
-    ):
+    ) -> Wallet:
         """Пополнение."""
         if method == settings.DEPOSIT:
             obj.balance += ammount
@@ -22,7 +23,7 @@ class WalletOperation:
 
     async def withdraw(
         self, obj, method: str, ammount: int, session: AsyncSession
-    ):
+    ) -> Wallet:
         """Списание."""
         if method == settings.WITHDRAW:
             obj.balance -= ammount

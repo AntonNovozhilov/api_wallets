@@ -25,12 +25,20 @@ class Validators:
                 detail="Вы не владелец кошелька.",
             )
 
-    async def method_operations(self, method):
+    async def method_operations(self, method: str):
         """Проверяем тип операции."""
         if method not in (settings.DEPOSIT, settings.WITHDRAW):
             raise HTTPException(
                 status_code=HTTPStatus.BAD_REQUEST,
                 detail="Неверный тип операции.",
+            )
+
+    async def super_user(self, user: User):
+        """Проверяем администратора."""
+        if user.is_superuser is False:
+            raise HTTPException(
+                status_code=HTTPStatus.FORBIDDEN,
+                detail="Доступно только администратору.",
             )
 
 
