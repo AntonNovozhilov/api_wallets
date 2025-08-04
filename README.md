@@ -41,6 +41,7 @@ POSTGRES_SERVER=db
 POSTGRES_DB=dbitc             # Название базы данных
 POSTGRES_USER=postgres        # Логин от PostgreSQL
 POSTGRES_PASSWORD=postgres    # Пароль от PostgreSQL
+```
 
 Запустите приложение через Docker:
 
