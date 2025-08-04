@@ -29,7 +29,7 @@ class WalletUpdate(BaseModel):
     def operation_type_validator(cls, value: str):
         """Проверка, что значение operation_type допустимо."""
         if value not in (settings.DEPOSIT, settings.WITHDRAW):
-            raise ValueError("Несуществующий метод.")
+            raise ValueError("Недопустимое значение метода.")
         return value
 
 

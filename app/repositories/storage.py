@@ -7,7 +7,7 @@ class Repositories(ABC):
 
     @abstractmethod
     async def get_by_id(self, pk: int, session: AsyncSession):
-        """Получаем объект по pk."""
+        """Получаем объект по id."""
 
     @abstractmethod
     async def get_multy(self, session: AsyncSession):

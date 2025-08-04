@@ -12,7 +12,7 @@ class WalletRepositories(Repositories):
         self.model = model
 
     async def get_by_id(self, pk: int, session: AsyncSession) -> Wallet:
-        """Получаем объект по pk."""
+        """Получаем объект по id."""
         obj = await session.execute(
             select(self.model).where(self.model.id == pk)
         )

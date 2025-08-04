@@ -5,7 +5,7 @@ from app.core.db import Base
 
 
 class Wallet(Base):
-    """Кошелек."""
+    """Кошелёк."""
 
     balance = Column(Float, nullable=False, default=0)
     owner = Column(ForeignKey("user.id"))

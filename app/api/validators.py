@@ -9,17 +9,17 @@ from app.models.users import User
 class Validators:
     """Валидаторы."""
 
-    async def positive_balance(self, balance: int):
-        """Проверяем, что баланс положительный после оперции."""
+    async def positive_balance(self, balance: float):
+        """Проверяем, что баланс положительный после операции."""
         if balance < 0:
             raise HTTPException(
                 status_code=HTTPStatus.BAD_REQUEST,
-                detail="Недостаточно средств на счете",
+                detail="Недостаточно средств на счёте.",
             )
 
-    async def owner_wallet(self, wallet_owner: int, current_user: User):
+    async def owner_wallet(self, wallet_owner: int, current_user_id: int):
         """Проверяем владельца кошелька."""
-        if wallet_owner != current_user:
+        if wallet_owner != current_user_id:
             raise HTTPException(
                 status_code=HTTPStatus.FORBIDDEN,
                 detail="Вы не владелец кошелька.",

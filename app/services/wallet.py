@@ -8,25 +8,25 @@ from app.models.wallet import Wallet
 class WalletOperation:
     """Операции с кошельком."""
 
-    def __init__(self, valida):
-        self.validate = valida
+    def __init__(self, validate):
+        self.validate = validate
 
     async def deposit(
-        self, obj, method: str, ammount: int, session: AsyncSession
+        self, obj, method: str, amount: int, session: AsyncSession
     ) -> Wallet:
         """Пополнение."""
         if method == settings.DEPOSIT:
-            obj.balance += ammount
+            obj.balance += amount
         await session.commit()
         await session.refresh(obj)
         return obj
 
     async def withdraw(
-        self, obj, method: str, ammount: int, session: AsyncSession
+        self, obj, method: str, amount: int, session: AsyncSession
     ) -> Wallet:
         """Списание."""
         if method == settings.WITHDRAW:
-            obj.balance -= ammount
+            obj.balance -= amount
         await self.validate.positive_balance(obj.balance)
         await session.commit()
         await session.refresh(obj)

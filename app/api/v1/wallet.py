@@ -18,7 +18,7 @@ async def get_all_wallets(
     session: AsyncSession = Depends(get_async_session),
     user: User = Depends(current_user),
 ):
-    """Получить все кошельки списком."""
+    """Получить список всех кошельков (только для администратора)."""
     await validate.super_user(user=user)
     wallet = await wallet_repositories.get_multy(session=session)
     return wallet
@@ -30,7 +30,7 @@ async def get_wallet_balance(
     user: User = Depends(current_user),
     session: AsyncSession = Depends(get_async_session),
 ):
-    """Получить кошельек по id."""
+    """Получить кошелёк по id."""
     wallet = await wallet_repositories.get_by_id(
         pk=wallet_uuid, session=session
     )
@@ -45,7 +45,7 @@ async def operation_on_wallet(
     user: User = Depends(current_user),
     session: AsyncSession = Depends(get_async_session),
 ):
-    """Проищвести операцию с кошельком."""
+    """Произвести операцию с кошельком (пополнение или списание)."""
     await validate.method_operations(method.operation_type)
     wallet = await wallet_repositories.get_by_id(
         pk=wallet_uuid, session=session
